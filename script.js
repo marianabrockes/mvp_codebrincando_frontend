@@ -9,15 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
         explicacaoAtualIndex: 0,
     };
 
-    // --- CONTEÚDO DAS EXPLICAÇÕES ---
-    const explicacoes = [
-        { tipo: 'intro', titulo: "Ei, você, você mesmo!!", texto: "Vamos aprender um pouco de Engenharia de Software?\nJuro que é muito mais simples do que parece!\n\nTeremos 5 conceitos para começar..." },
-        { tipo: 'conceito', titulo: "1. O que é um site?", texto: "Um site é como uma casinha que vive dentro do computador! Quando você entra em um site, é como visitar essa casa. Ela pode ter portas (links), quadros na parede (imagens), recados colados na geladeira (textos) e até botões que fazem coisas acontecerem (tipo uma campainha que toca)!" },
-        { tipo: 'conceito', titulo: "2. O que é HTML? (a estrutura)", texto: "O HTML é como o esqueleto da casa. Ele diz onde vai o título, a imagem, o botão, a lista… É tipo montar uma lancheira com divisórias: um espaço pro sanduíche, outro pro suco, outro pra sobremesa.", codigo: `<h1>Olá, mundo!</h1>\n<p>Este é o meu primeiro site!</p>` },
-        { tipo: 'conceito', titulo: "3. O que é CSS? (o visual)", texto: "CSS é o que deixa o site bonito! Ele pinta as paredes, escolhe a fonte do texto, muda o tamanho das coisas e até coloca brilhos e animações. É como colocar roupas e maquiagem no seu personagem!", codigo: `p {\n  color: blue;\n  font-size: 20px;\n}` },
-        { tipo: 'conceito', titulo: "4. O que é JavaScript? (o cérebro)", texto: "O JavaScript é o que dá vida ao site! Ele faz as coisas se mexerem, responderem quando você clica, mudarem sozinhas. É como o cérebro de um robô que reage quando você fala com ele.", codigo: `alert("Bem-vindo ao meu site!");` },
-        { tipo: 'conceito', titulo: "5. O que é um Bug?", texto: "Um bug é quando o código não funciona direitinho. Pode ser porque esquecemos um pedacinho, escrevemos uma palavrinha errada, ou colocamos tudo na ordem errada. É como montar um LEGO e perceber que a roda está do lado errado." }
-    ];
     const apiUrl = 'http://127.0.0.1:5000';
 
     // --- SELEÇÃO DE ELEMENTOS DO DOM ---
@@ -40,6 +31,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalTitulo = document.getElementById('modal-titulo');
     const modalTexto = document.getElementById('modal-texto');
     const btnModalFechar = document.getElementById('btn-modal-fechar');
+
+    let explicacoes = []; // Começa vazio
+
+    // Função para buscar as explicações da API
+    async function buscarExplicacoes() {
+        try {
+            const response = await fetch(`${apiUrl}/explicacoes`);
+            if (!response.ok) {
+                throw new Error('Erro ao buscar explicações da API');
+            }
+            explicacoes = await response.json();
+            renderizarExplicacoes(); // Mostra a primeira explicacao depois de carregar
+        } catch (error) {
+            console.error('Falha ao carregar explicações:', error);
+            dialogosContainer.innerHTML = '<p>Oops! Não conseguimos carregar o conteúdo. Tente recarregar a página.</p>';
+        }
+    }
 
     // --- FUNÇÕES ---
     function mostrarTela(nomeTela) {
@@ -101,7 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
         try {
-            const response = await fetch(`${apiUrl}/api/progresso/${estado.usuarioLogado.id}`);
+            const response = await fetch(`${apiUrl}/progresso/${estado.usuarioLogado.id}`);
             
             if (!response.ok) throw new Error('A resposta da API para buscar desafios não foi OK');
             
@@ -142,7 +150,7 @@ document.addEventListener('DOMContentLoaded', () => {
         modalTitulo.textContent = 'Parabéns! 🥳';
         
         let conteudoHtml = texto.replace(/\n/g, '<br>');
-        conteudoHtml += `<br><br><img src="./criancadancando.gif" alt="Parabéns!">`;
+        conteudoHtml += `<br><br><img src="./imagens/criancadancando.gif" alt="Parabéns!">`;
         conteudoHtml += `<br><br>Você completou o desafio! Agora, vamos para o próximo?`;
         
         modalTexto.innerHTML = conteudoHtml; // Usamos innerHTML para renderizar o <pre>
@@ -185,7 +193,7 @@ document.addEventListener('DOMContentLoaded', () => {
             estado.usuarioLogado = { id: data.usuario_id, nome: nome };
             
             estado.explicacaoAtualIndex = 0;
-            renderizarExplicacoes();
+            buscarExplicacoes(); // Busca as explicações da API
             mostrarTela('tela-explicacao');
 
         } catch (error) {
@@ -203,7 +211,7 @@ document.addEventListener('DOMContentLoaded', () => {
             codigo_submetido: editorCodigo.value
         };
         try {
-            const response = await fetch(`${apiUrl}/api/progresso`, {
+            const response = await fetch(`${apiUrl}/progresso`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(dadosSubmissao)

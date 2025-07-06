@@ -32,7 +32,7 @@ body {
 /* --- ESTILOS DO LOGIN (2 COLUNAS) --- */
 #tela-login .split-container { display: flex; width: 100%; height: 100%; }
 #tela-login .login-pane { flex: 0.4; background-color: var(--cor-fundo-dark); color: var(--cor-texto-dark); display: flex; justify-content: center; align-items: center; padding: 20px; }
-#tela-login .image-pane { flex: 0.6; background-image: url('fundo-login.jpg'); background-size: cover; background-position: center; }
+#tela-login .image-pane { flex: 0.6; background-image: url('./imagens/fundo-login.jpg'); background-size: cover; background-position: center; }
 .login-box { background-color: var(--cor-caixa); padding: 40px; border-radius: 20px; border: 1px solid var(--cor-primaria); box-shadow: var(--brilho-neon); text-align: center; width: 100%; max-width: 380px; }
 .login-box h1 { margin-bottom: 10px; color: white; }
 .login-box p { margin-bottom: 30px; font-size: 0.9em; color: #a0a0a0; }
@@ -66,7 +66,7 @@ form button:hover { box-shadow: var(--brilho-neon); }
     justify-content: center;
     align-items: center;
     height: 100%;
-    background-image: url('mascote.jpg');
+    background-image: url('./imagens/mascote.jpg');
     background-repeat: repeat;
     background-size: 80px; /* Altere este valor para mascotes maiores ou menores! */
     background-position: center;
