@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CodeBrincando - Aprenda a Programar!</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main id="tela-login" class="tela">
+      <div class="split-container">
+        <div class="login-pane">
+          <div class="login-box">
+            <h1>CodeBrincando 🚀</h1>
+            <p>Sua jornada no mundo do código começa aqui!</p>
+            <form id="form-login">
+              <div class="input-group">
+                <input type="text" id="nome" name="nome" required />
+                <label for="nome">Seu Nome</label>
+              </div>
+              <div class="input-group">
+                <input type="number" id="idade" name="idade" required />
+                <label for="idade">Idade</label>
+              </div>
+              <button type="submit">Começar a Aventura!</button>
+            </form>
+          </div>
+        </div>
+        <div class="image-pane"></div>
+      </div>
+    </main>
+
+    <main id="tela-explicacao" class="tela hidden">
+      <div class="container-explicacao">
+        <div class="coluna-lateral"></div>
+
+        <div class="coluna-central">
+          <div id="dialogos-container"></div>
+          <div class="navegacao-explicacao">
+            <button id="btn-anterior-explicacao" class="hidden">
+              ⬅️ Voltar
+            </button>
+            <button id="btn-proxima-explicacao">Vamos lá!</button>
+          </div>
+        </div>
+
+        <div class="coluna-lateral"></div>
+      </div>
+    </main>
+
+    <main id="tela-desafios" class="tela hidden">
+      <div class="desafios-container-wrapper">
+        <header class="desafios-header">
+          <h1>Mapa dos Desafios</h1>
+          <p>Escolha uma missão para começar a programar!</p>
+        </header>
+        <div id="lista-desafios-container"></div>
+      </div>
+    </main>
+
+    <main id="tela-desafio-ativo" class="tela hidden">
+      <div class="desafio-ativo-container">
+        <div class="coluna-instrucoes">
+          <h2 id="desafio-titulo"></h2>
+          <p id="desafio-instrucao"></p>
+          <button id="btn-voltar">⬅️ Voltar ao Mapa</button>
+        </div>
+        <div class="coluna-editor">
+          <h3>Código com Bug 🐞</h3>
+          <textarea id="editor-codigo" spellcheck="false"></textarea>
+          <button id="btn-verificar">Verificar Missão!</button>
+        </div>
+        <div class="coluna-preview">
+          <h3>Preview em Tempo Real</h3>
+          <iframe id="visualizador-resultado"></iframe>
+        </div>
+      </div>
+    </main>
+
+    <div id="modal-feedback" class="modal-container hidden">
+      <div class="modal-conteudo">
+        <h2 id="modal-titulo"></h2>
+        <p id="modal-texto"></p>
+        <button id="btn-modal-fechar">Ok, entendi!</button>
+      </div>
+    </div>
+
+    <script src="script.js" defer></script>
+  </body>
+</html>

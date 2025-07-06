@@ -1,0 +1,245 @@
+/* --- IMPORTAÇÃO DA FONTE E VARIÁVEIS DE COR --- */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+:root {
+    --cor-fundo-dark: #0a0a1a;
+    --cor-caixa: #1a1a2e;
+    --cor-fundo-light: #eef2f9;
+    --cor-primaria: #7f5af0;
+    --cor-secundaria: #00bfff;
+    --cor-texto-dark: #e0e0e0;
+    --cor-texto-light: #2c3e50;
+    --brilho-neon: 0 0 8px var(--cor-secundaria);
+    --fonte-moderna: 'Poppins', sans-serif;
+}
+* {
+    box-sizing: border-box;
+}
+body {
+    margin: 0;
+    font-family: var(--fonte-moderna);
+    overflow: hidden;
+}
+.tela {
+    display: block;
+    width: 100vw;
+    height: 100vh;
+}
+.hidden {
+    display: none !important;
+}
+
+/* --- ESTILOS DO LOGIN (2 COLUNAS) --- */
+#tela-login .split-container { display: flex; width: 100%; height: 100%; }
+#tela-login .login-pane { flex: 0.4; background-color: var(--cor-fundo-dark); color: var(--cor-texto-dark); display: flex; justify-content: center; align-items: center; padding: 20px; }
+#tela-login .image-pane { flex: 0.6; background-image: url('fundo-login.jpg'); background-size: cover; background-position: center; }
+.login-box { background-color: var(--cor-caixa); padding: 40px; border-radius: 20px; border: 1px solid var(--cor-primaria); box-shadow: var(--brilho-neon); text-align: center; width: 100%; max-width: 380px; }
+.login-box h1 { margin-bottom: 10px; color: white; }
+.login-box p { margin-bottom: 30px; font-size: 0.9em; color: #a0a0a0; }
+.input-group { position: relative; margin-bottom: 30px; }
+.input-group input { width: 100%; padding: 10px 5px; font-size: 16px; color: white; background: transparent; border: none; border-bottom: 2px solid var(--cor-secundaria); outline: none; }
+.input-group label { position: absolute; top: 0; left: 0; padding: 10px 0; font-size: 16px; color: #a0a0a0; pointer-events: none; transition: .5s; }
+.input-group input:focus ~ label, .input-group input:valid ~ label { top: -20px; left: 0; color: var(--cor-primaria); font-size: 12px; }
+form button { width: 100%; padding: 12px; border: none; border-radius: 25px; background-color: var(--cor-primaria); color: white; font-size: 16px; font-weight: bold; cursor: pointer; transition: all 0.3s; }
+form button:hover { box-shadow: var(--brilho-neon); }
+
+/* --- ESTILOS DA TELA DE EXPLICAÇÃO --- */
+#tela-explicacao {
+    background-color: var(--cor-fundo-light);
+    color: var(--cor-texto-light);
+    min-height: 100vh;
+    padding: 20px;
+}
+.container-explicacao {
+    display: grid;
+    grid-template-columns: 1fr 8fr 1fr;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    max-width: 1600px;
+    margin: auto;
+    height: calc(100vh - 40px);
+}
+/* MUDANÇA: Estilo aplicado a AMBAS as colunas laterais */
+.coluna-lateral {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    background-image: url('mascote.jpg');
+    background-repeat: repeat;
+    background-size: 80px; /* Altere este valor para mascotes maiores ou menores! */
+    background-position: center;
+    opacity: 0.3; /* Deixei a opacidade um pouco mais baixa */
+}
+
+/* REMOVIDO: A regra para o vídeo não é mais necessária */
+
+.coluna-central {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    padding: 30px 40px;
+}
+#dialogos-container {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding-right: 15px;
+}
+.dialogo-item { padding-bottom: 20px; margin-bottom: 20px; border-bottom: 2px solid #f0f2f5; }
+.dialogo-item:last-child { border-bottom: none; }
+.dialogo-item h2 { color: var(--cor-primaria); font-size: 2em; font-weight: 700; text-align: center;}
+.dialogo-item:first-child p {
+    text-align: center;
+}
+.dialogo-item p { font-size: 1.1em; line-height: 1.7; white-space: pre-wrap; word-wrap: break-word; }
+.dialogo-item pre { background-color: #2d2d2d; color: white; padding: 15px; border-radius: 5px; white-space: pre-wrap; word-wrap: break-word; font-family: 'Courier New', Courier, monospace; }
+.navegacao-explicacao { display: flex; justify-content: center; gap: 20px; margin-top: 20px; padding-top: 20px; border-top: 2px solid #f0f2f5; }
+#btn-proxima-explicacao, #btn-anterior-explicacao { padding: 15px 30px; border: none; border-radius: 50px; background-color: var(--cor-primaria); color: white; font-size: 1.2em; font-weight: bold; cursor: pointer; transition: all 0.3s; }
+#btn-anterior-explicacao { background-color: #aaa; }
+#btn-proxima-explicacao:hover, #btn-anterior-explicacao:hover { transform: scale(1.05); }
+
+/* --- RESPONSIVIDADE --- */
+@media (max-width: 1024px) {
+    .coluna-lateral { display: none; }
+    .container-explicacao { grid-template-columns: 1fr; }
+    #tela-login .login-pane { flex: 0.5; }
+    #tela-login .image-pane { flex: 0.5; }
+}
+@media (max-width: 600px) {
+    #tela-login .image-pane { display: none; }
+    #tela-login .login-pane { flex: 1; }
+}
+/* --- TELA DE MAPA DE DESAFIOS --- */
+#tela-desafios {
+    background-color: var(--cor-fundo-light);
+    padding: 40px;
+    overflow-y: auto;
+    text-align: center;
+}
+.desafios-container-wrapper {
+    max-width: 1200px;
+    margin: auto;
+}
+.desafios-header h1 {
+    font-size: 3em;
+    color: var(--cor-primaria);
+}
+#lista-desafios-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+    text-align: left;
+}
+.desafio-card {
+    background-color: white;
+    border: 1px solid #ddd;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-left: 5px solid var(--cor-secundaria);
+}
+.desafio-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.12);
+}
+.desafio-card h3 {
+    margin-top: 0;
+    color: var(--cor-primaria);
+}
+.desafio-card .status {
+    font-weight: bold;
+    color: #f39c12; /* Laranja para "pendente" */
+}
+.desafio-card.concluido {
+    border-left-color: #2ecc71; /* Verde para "concluído" */
+    background-color: #f8f8f8;
+}
+.desafio-card.concluido h3 {
+    color: #888;
+    text-decoration: line-through;
+}
+.desafio-card.concluido .status {
+    color: #2ecc71;
+}
+
+/* --- TELA DE DESAFIO ATIVO --- */
+#tela-desafio-ativo {
+    background-color: #2d2d2d;
+}
+.desafio-ativo-container {
+    display: grid;
+    grid-template-columns: 25% 45% 30%;
+    gap: 15px;
+    width: 100%;
+    height: 100%;
+    padding: 15px;
+}
+.coluna-instrucoes, .coluna-editor, .coluna-preview {
+    background-color: #1e1e1e;
+    color: #f0f0f0;
+    border-radius: 15px;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+}
+.coluna-instrucoes h2 { color: var(--cor-primaria); font-size: 1.8em; margin-top: 0; }
+.coluna-instrucoes p { line-height: 1.6; flex-grow: 1; }
+#btn-voltar {
+    margin-top: auto;
+    padding: 12px;
+    border: 1px solid #555;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: #333;
+    color: white;
+    transition: background-color 0.3s;
+}
+#btn-voltar:hover { background-color: #444; }
+.coluna-editor h3, .coluna-preview h3 { margin-top: 0; color: #ccc; border-bottom: 1px solid #444; padding-bottom: 10px; }
+#editor-codigo {
+    flex-grow: 1;
+    background-color: #1e1e1e;
+    color: #d4d4d4;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 15px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1rem;
+    resize: none;
+}
+#btn-verificar {
+    margin-top: 15px;
+    padding: 15px;
+    border: 1px solid #555;
+    border-radius: 8px;
+    background-color: #333;
+    color: white;
+    font-size: 1.2em;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#btn-verificar:hover {
+    background-color: #444;
+}
+
+#visualizador-resultado {
+    flex-grow: 1;
+    border: 1px solid #333;
+    border-radius: 8px;
+    background-color: white;
+}
+
+/* --- MODAL DE FEEDBACK --- */
+.modal-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.6); display: flex; justify-content: center; align-items: center; z-index: 1000; }
+.modal-conteudo { background-color: white; color: var(--cor-texto-light); padding: 2rem 3rem; border-radius: 10px; text-align: center; max-width: 400px; }
+#modal-titulo.sucesso { color: var(--cor-sucesso); }
+#modal-titulo.erro { color: var(--cor-erro); }
+#btn-modal-fechar { padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-size: 1em; margin-top: 10px; background-color: #ccc; }
